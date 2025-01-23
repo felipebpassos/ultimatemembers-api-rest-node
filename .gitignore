@@ -1,0 +1,48 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.pid.lock
+
+# Diretório de dependências
+node_modules/
+
+# Arquivos de ambiente
+.env
+.env.*.local
+
+# Diretórios temporários
+tmp/
+temp/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Compilação
+dist/
+build/
+
+# Cache
+.cache/
+*.tsbuildinfo
+
+# Debugger do VSCode
+.vscode/
+
+# Arquivos do Sequelize CLI
+config/config.json
+
+# Outros
+.idea/
+*.swp
+*.bak
+*.orig
+*.tmp
