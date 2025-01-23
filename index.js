@@ -1,11 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+require('dotenv').config();
 const { sequelize } = require('./models'); // Importando a configuração do Sequelize
 
 // Importando as rotas
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
+const bannerRoutes = require('./routes/bannerRoutes');
 const moduleRoutes = require('./routes/moduleRoutes');
 const lessonRoutes = require('./routes/lessonRoutes');
 
@@ -25,6 +27,7 @@ app.use('/auth', authRoutes);
 
 // Rotas privadas (protegidas por JWT)
 app.use('/users', authenticateJWT, userRoutes);
+app.use('/banners', authenticateJWT, bannerRoutes);
 app.use('/modules', authenticateJWT, moduleRoutes);
 app.use('/lessons', authenticateJWT, lessonRoutes);
 
