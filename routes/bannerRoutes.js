@@ -54,7 +54,9 @@ router.post('/', createBanner);
  *     tags:
  *       - Banners
  *     summary: Obter todos os banners
- *     description: Retorna uma lista de todos os banners disponíveis.
+ *     description: Retorna uma lista de todos os banners disponíveis. Requer um token JWT válido.
+ *     security:
+ *       - jwt: []
  *     responses:
  *       200:
  *         description: Lista de banners.

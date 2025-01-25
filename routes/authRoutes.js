@@ -183,4 +183,58 @@ router.post('/register', authenticateJWT, register);
  */
 router.post('/login', login);
 
+/**
+ * @swagger
+ * /api/v1.0/auth/validate-token:
+ *   get:
+ *     tags:
+ *       - Auth
+ *     summary: Validação do token JWT
+ *     description: Valida um token JWT fornecido no cabeçalho Authorization e retorna o usuário autenticado se o token for válido.
+ *     security:
+ *       - jwt: []  # Referência ao esquema de segurança
+ *     responses:
+ *       200:
+ *         description: Token válido e usuário autenticado.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Token válido."
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     uuid:
+ *                       type: string
+ *                       example: "123e4567-e89b-12d3-a456-426614174000"
+ *                     name:
+ *                       type: string
+ *                       example: "João Silva"
+ *                     email:
+ *                       type: string
+ *                       example: "joao.silva@email.com"
+ *                     role:
+ *                       type: string
+ *                       example: "user"
+ *       403:
+ *         description: Token inválido ou não fornecido.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Token inválido."
+ */
+router.get('/validate-token', authenticateJWT, (req, res) => {
+    res.status(200).json({
+        message: 'Token válido.',
+        user: req.user, // Retorna as informações do usuário autenticado
+    });
+});
+
 module.exports = router;
