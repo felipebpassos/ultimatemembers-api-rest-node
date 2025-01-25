@@ -16,7 +16,10 @@ const createUser = async (data) => {
  * @returns {Object|null} Usuário encontrado ou null.
  */
 const findUserByEmail = async (email) => {
-  return await User.findOne({ where: { email } });
+  return await User.findOne({
+    where: { email },
+    attributes: { exclude: ['id'] }, // Exclui apenas o id
+  });
 };
 
 /**
@@ -25,7 +28,28 @@ const findUserByEmail = async (email) => {
  * @returns {Object|null} Usuário encontrado ou null.
  */
 const findUserByUuid = async (uuid) => {
-  return await User.findOne({ where: { uuid } });
+  return await User.findOne({
+    where: { uuid },
+    attributes: { exclude: ['id', 'password'] } // Exclui id e password da resposta
+  });
+};
+
+/**
+ * Obtém usuários com paginação e filtro por role.
+ * @param {number} page Número da página.
+ * @param {string} role Role do usuário (ex: 'adm').
+ * @returns {Object} Objeto com a lista de usuários e a contagem total.
+ */
+const getUsersByRoleService = async (page, role) => {
+  const limit = 15; // Limite de usuários por página
+  const offset = (page - 1) * limit; // Calcula o offset com base na página
+
+  return await User.findAndCountAll({
+    where: { role },
+    limit,
+    offset,
+    attributes: { exclude: ['password'] }, // Exclui a senha dos resultados
+  });
 };
 
 /**
@@ -45,6 +69,17 @@ const updateUserProfile = async (uuid, data) => {
   return user;
 };
 
+const deleteUserByUuid = async (uuid) => {
+  const user = await User.findOne({ where: { uuid } });
+
+  if (!user) {
+    return null; // Usuário não encontrado
+  }
+
+  await user.destroy(); // Deleta o usuário do banco de dados
+  return true; // Retorna verdadeiro se o usuário foi deletado
+};
+
 /**
  * Gera um token JWT.
  * @param {Object} payload Dados a serem incluídos no token.
@@ -59,7 +94,9 @@ const generateToken = (payload) => {
 module.exports = {
   createUser,
   findUserByEmail,
+  getUsersByRoleService,
   findUserByUuid,
   updateUserProfile,
   generateToken,
+  deleteUserByUuid,
 };

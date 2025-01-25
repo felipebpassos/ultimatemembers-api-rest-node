@@ -54,10 +54,13 @@ const login = async (req, res) => {
     // Gera o token JWT
     const token = generateToken({ uuid: user.uuid, role: user.role });
 
+    // Remove o campo password antes de enviar a resposta
+    const { password: _, ...userWithoutPassword } = user.toJSON();
+
     res.status(200).json({
       message: 'Login bem-sucedido.',
       token,
-      user: { uuid: user.uuid, name: user.name, email: user.email, role: user.role },
+      user: userWithoutPassword,
     });
   } catch (error) {
     console.error(error);

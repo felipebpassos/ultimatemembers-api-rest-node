@@ -2,12 +2,21 @@ const express = require('express');
 const router = express.Router();
 
 // Importando o controlador de usuário
-const { getProfile, updateProfile } = require('../controllers/userController');
+const { getProfile, getUsersByRole, updateProfile, deleteUser } = require('../controllers/userController');
 
 /**
  * @swagger
- * /api/v1.0/user/profile:
+ * tags:
+ *   name: Users
+ *   description: Gerenciamento de usuários
+ */
+
+/**
+ * @swagger
+ * /api/v1.0/users/profile:
  *   get:
+ *     tags:
+ *       - Users
  *     summary: Obter perfil do usuário autenticado
  *     description: Retorna as informações do perfil do usuário autenticado. A rota requer um token JWT válido.
  *     security:
@@ -55,12 +64,68 @@ const { getProfile, updateProfile } = require('../controllers/userController');
  */
 router.get('/profile', getProfile);
 
+// Endpoint para listar usuários paginados (somente para 'adm')
 /**
  * @swagger
- * /api/v1.0/user/profile:
+ * /api/v1.0/users/:
+ *   get:
+ *     tags:
+ *       - Users
+ *     summary: Obter usuários paginados (somente administradores)
+ *     description: Retorna uma lista paginada de usuários. A rota requer um token JWT válido e o role 'adm'.
+ *     security:
+ *       - jwt: []
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         required: true
+ *         description: Número da página (começando de 1)
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *       - in: query
+ *         name: role
+ *         required: true
+ *         description: O role do usuário ('user' ou 'adm')
+ *         schema:
+ *           type: string
+ *           example: "adm"
+ *     responses:
+ *       200:
+ *         description: Lista de usuários retornada com sucesso.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 users:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       uuid:
+ *                         type: string
+ *                       name:
+ *                         type: string
+ *                       email:
+ *                         type: string
+ *                       role:
+ *                         type: string
+ *       403:
+ *         description: Acesso negado para usuários não administradores.
+ *       500:
+ *         description: Erro ao obter usuários.
+ */
+router.get('/', getUsersByRole);
+
+/**
+ * @swagger
+ * /api/v1.0/users/profile:
  *   put:
- *     summary: Atualizar perfil do usuário autenticado
- *     description: Atualiza as informações do perfil do usuário autenticado. A rota requer um token JWT válido e os dados a serem atualizados no corpo da requisição.
+ *     tags:
+ *       - Users
+ *     summary: Atualizar dados de um usuário (somente administradores)
+ *     description: Atualiza as informações do perfil de um usuário específico, com base no UUID fornecido no corpo da requisição. A rota requer um token JWT válido e os dados a serem atualizados no corpo da requisição.
  *     security:
  *       - jwt: []
  *     requestBody:
@@ -70,6 +135,10 @@ router.get('/profile', getProfile);
  *           schema:
  *             type: object
  *             properties:
+ *               uuid:
+ *                 type: string
+ *                 description: UUID do usuário a ser atualizado (não do usuário autenticado).
+ *                 example: "123e4567-e89b-12d3-a456-426614174000"
  *               name:
  *                 type: string
  *                 description: Nome do usuário.
@@ -114,5 +183,35 @@ router.get('/profile', getProfile);
  *                   example: "Erro ao atualizar o perfil do usuário."
  */
 router.put('/profile', updateProfile);
+
+/**
+ * @swagger
+ * /api/v1.0/users/{uuid}:
+ *   delete:
+ *     tags:
+ *       - Users
+ *     summary: Deletar um usuário (somente administradores)
+ *     description: Deleta um usuário com base no UUID fornecido. A rota requer um token JWT válido e o role 'adm'.
+ *     security:
+ *       - jwt: []
+ *     parameters:
+ *       - in: path
+ *         name: uuid
+ *         required: true
+ *         description: UUID do usuário a ser deletado.
+ *         schema:
+ *           type: string
+ *           example: "123e4567-e89b-12d3-a456-426614174000"
+ *     responses:
+ *       200:
+ *         description: Usuário deletado com sucesso.
+ *       403:
+ *         description: Acesso negado para usuários não administradores.
+ *       404:
+ *         description: Usuário não encontrado.
+ *       500:
+ *         description: Erro ao deletar o usuário.
+ */
+router.delete('/:uuid', deleteUser);
 
 module.exports = router;

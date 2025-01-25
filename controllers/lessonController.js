@@ -1,6 +1,5 @@
 const {
     createLesson: createLessonService,
-    getLessons: getLessonsService,
     updateLesson: updateLessonService,
     deleteLesson: deleteLessonService,
 } = require('../services/lessonService');
@@ -21,21 +20,6 @@ const createLesson = async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Erro ao criar a lição.' });
-    }
-};
-
-/**
- * Obtém todas as lições.
- * @param {Object} req Requisição.
- * @param {Object} res Resposta.
- */
-const getLessons = async (req, res) => {
-    try {
-        const lessons = await getLessonsService();
-        res.status(200).json(lessons);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: 'Erro ao obter as lições.' });
     }
 };
 
@@ -87,7 +71,6 @@ const deleteLesson = async (req, res) => {
 
 module.exports = {
     createLesson,
-    getLessons,
     updateLesson,
     deleteLesson,
 };

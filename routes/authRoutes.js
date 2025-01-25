@@ -8,9 +8,18 @@ const { authenticateJWT } = require('../middleware/authMiddleware');
 
 /**
  * @swagger
+ * tags:
+ *   name: Auth
+ *   description: Gerenciamento de login, registro e autenticação
+ */
+
+/**
+ * @swagger
  * /api/v1.0/auth/register:
  *   post:
- *     summary: Cadastro de novo usuário
+ *     tags:
+ *       - Auth
+ *     summary: Cadastro de novo usuário (somente administradores)
  *     description: Apenas administradores podem registrar novos usuários. O registro de usuários exige um token JWT válido de um administrador.
  *     security:
  *       - jwt: []  # Referência ao esquema de segurança
@@ -100,6 +109,8 @@ router.post('/register', authenticateJWT, register);
  * @swagger
  * /api/v1.0/auth/login:
  *   post:
+ *     tags:
+ *       - Auth
  *     summary: Login de usuário
  *     description: Realiza o login de um usuário existente. Exige email e senha válidos. Retorna um token JWT se o login for bem-sucedido.
  *     requestBody:

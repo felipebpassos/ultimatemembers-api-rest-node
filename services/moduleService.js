@@ -1,4 +1,5 @@
 const Module = require('../models/Module');
+const Lesson = require('../models/Lesson');
 
 // Service para criar um módulo
 const createModule = async (moduleData) => {
@@ -36,9 +37,19 @@ const deleteModule = async (id) => {
   return module;
 };
 
+// Service para obter as aulas de um módulo específico
+const getLessonsByModule = async (moduleId) => {
+  const lessons = await Lesson.findAll({
+    where: { moduleId },
+    attributes: ['id', 'title', 'description', 'video', 'platform'],
+  });
+  return lessons;
+};
+
 module.exports = {
   createModule,
   getModules,
   updateModule,
   deleteModule,
+  getLessonsByModule,
 };

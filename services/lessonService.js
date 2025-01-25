@@ -11,16 +11,6 @@ const createLesson = async (data) => {
 };
 
 /**
- * Busca todas as lições.
- * @returns {Array} Lista de lições.
- */
-const getLessons = async () => {
-  return await Lesson.findAll({
-    include: [{ model: Module, attributes: ['id', 'title'] }],
-  });
-};
-
-/**
  * Atualiza uma lição pelo ID.
  * @param {number} id ID da lição.
  * @param {Object} data Dados para atualizar.
@@ -50,7 +40,6 @@ const deleteLesson = async (id) => {
 
 module.exports = {
   createLesson,
-  getLessons,
   updateLesson,
   deleteLesson,
 };
