@@ -14,7 +14,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'https://ultimatemembers-api-rest-node.onrender.com',
+        url: 'https://localhost:3000',
         description: 'Servidor Local',
       },
     ],
