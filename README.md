@@ -1,8 +1,9 @@
 # Ultimate Members (backend)
 
-![Interface da API](https://github.com/felipebpassos/felipebpassos/blob/main/print.png?raw=true)
+👉 [Live Link](https://github.com/felipebpassos/members-area-react-ts-tailwind)
+📚 [API (Swagger)](https://github.com/felipebpassos/members-area-react-ts-tailwind)
 
-[Frontend - Repositório](https://github.com/felipebpassos/members-area-react-ts-tailwind)
+[Frontend](https://github.com/felipebpassos/members-area-react-ts-tailwind)
 
 ## Descrição do Projeto
 
@@ -12,7 +13,7 @@ Este é o projeto backend de **Área de Membros para Cursos Online** desenvolvid
 - **JWT (JSON Web Tokens)** para autenticação de usuários;
 - **bcrypt.js** para criptografia de senhas;
 - **dotenv** para gerenciamento de variáveis de ambiente;
-- **Swagger** para documentação interativa da API.
+- **Swagger** para documentação e uso interativo da API.
 
 A aplicação gerencia o backend da plataforma de cursos online, com funcionalidades de autenticação, controle de usuários e acesso a conteúdos como módulos e aulas.
 
@@ -90,9 +91,9 @@ O projeto segue uma **arquitetura modularizada**, onde cada pasta representa uma
 /models               # Modelos do Sequelize (usuários, módulos, aulas)
 /routes               # Arquivos de definição de rotas
 /services             # Lógica de negócio (ex: autenticação, manipulação de dados)
-/middlewares          # Middlewares para autenticação, validação, etc.
+/middleware           # Middlewares para autenticação, validação, etc.
 /utils                # Funções utilitárias
-/server.js            # Ponto de entrada do servidor Express
+index.js              # Ponto de entrada do servidor Express
 .env                  # Variáveis de ambiente
 .gitignore            # Arquivos e pastas ignorados pelo Git
 package.json          # Dependências do projeto
