@@ -1,9 +1,12 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
-const swaggerUi = require('swagger-ui-express'); // Importar Swagger UI
-const swaggerDocs = require('./config/swagger'); // Importar a configuração do Swagger
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocs = require('./config/swagger');
 require('dotenv').config();
+
+// Importando o helmet
+const helmet = require('helmet');
 
 // Importando a instância do Sequelize
 const sequelize = require('./config/db');
@@ -23,6 +26,7 @@ const app = express();
 
 // Middleware
 app.use(cors());
+app.use(helmet()); // Adicionando o helmet para segurança
 app.use(morgan('dev')); // Log de requisições
 app.use(express.json()); // Permite que o servidor entenda requisições com corpo JSON
 

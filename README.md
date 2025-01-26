@@ -1,8 +1,8 @@
 # Ultimate Members (backend)
 
-👉 [Live Link](https://github.com/felipebpassos/members-area-react-ts-tailwind)
+👉 [Live Link](https://members-area-react-ts-tailwind.vercel.app/)
 
-📚 [API (Swagger)](https://github.com/felipebpassos/members-area-react-ts-tailwind)
+📚 [API (Swagger UI)](https://ultimatemembers-api-rest-node.onrender.com/api/v1.0/api-docs/)
 
 Veja também: [Frontend](https://github.com/felipebpassos/members-area-react-ts-tailwind)
 
@@ -52,9 +52,9 @@ Gerenciamento de banners
 #### Lessons
 Gerenciamento de aulas
 
-- **POST** `/api/v1.0/lessons`: Criar uma nova aula
-- **PUT** `/api/v1.0/lessons/{id}`: Atualizar uma aula existente
-- **DELETE** `/api/v1.0/lessons/{id}`: Deletar uma aula
+- **POST** `/api/v1.0/lessons`: Criar uma nova aula (Somente administradores)
+- **PUT** `/api/v1.0/lessons/{id}`: Atualizar uma aula existente (Somente administradores)
+- **DELETE** `/api/v1.0/lessons/{id}`: Deletar uma aula (Somente administradores)
 
 #### Modules
 Gerenciamento de módulos e aulas associadas
@@ -77,7 +77,7 @@ Gerenciamento de usuários
 
 ## Swagger
 
-A documentação interativa da API foi gerada utilizando o **Swagger**. Você pode acessar a documentação da API em [http://localhost:3000/api-docs](http://localhost:3000/api-docs) após iniciar o servidor.
+A documentação interativa da API foi gerada utilizando o **Swagger**. Você pode acessar a documentação da API em [https://ultimatemembers-api-rest-node.onrender.com/api/v1.0/api-docs/](https://ultimatemembers-api-rest-node.onrender.com/api/v1.0/api-docs/) após iniciar o servidor.
 
 ---
 
