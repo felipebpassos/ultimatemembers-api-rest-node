@@ -59,7 +59,7 @@ const startServer = async () => {
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
       console.log(`Servidor rodando na porta ${PORT}`);
-      console.log(`Documentação Swagger disponível em http://localhost:${PORT}/api/v1.0/api-docs`);
+      console.log(`Documentação Swagger disponível em https://ultimatemembers-api-rest-node.onrender.com:${PORT}/api/v1.0/api-docs`);
     });
   } catch (error) {
     console.error('Erro ao conectar ao banco de dados:', error);
