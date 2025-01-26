@@ -4,7 +4,7 @@
 
 📚 [API (Swagger)](https://github.com/felipebpassos/members-area-react-ts-tailwind)
 
-[Frontend](https://github.com/felipebpassos/members-area-react-ts-tailwind)
+Veja também: [Frontend](https://github.com/felipebpassos/members-area-react-ts-tailwind)
 
 ## Descrição do Projeto
 
