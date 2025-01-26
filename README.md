@@ -9,7 +9,8 @@ Este é o projeto backend de **Área de Membros para Cursos Online** desenvolvid
 - **Sequelize** para ORM e interação com banco de dados MySQL;
 - **JWT (JSON Web Tokens)** para autenticação de usuários;
 - **bcrypt.js** para criptografia de senhas;
-- **dotenv** para gerenciamento de variáveis de ambiente.
+- **dotenv** para gerenciamento de variáveis de ambiente;
+- **Swagger** para documentação interativa da API.
 
 A aplicação gerencia o backend da plataforma de cursos online, com funcionalidades de autenticação, controle de usuários e acesso a conteúdos como módulos e aulas.
 
@@ -28,11 +29,51 @@ A aplicação gerencia o backend da plataforma de cursos online, com funcionalid
 - Permite que apenas usuários autenticados acessem conteúdos como módulos e aulas.
 
 ### Rotas Implementadas:
-- **POST `/auth/login`**: Rota de login, que retorna um token JWT.
-- **POST `/auth/register`**: Rota de registro de um novo usuário.
-- **GET `/dashboard`**: Rota protegida, retorna dados privados para o usuário logado.
-- **GET `/modulos/:id`**: Rota para exibir as aulas de um módulo específico, com verificação de autenticação.
-- **GET `/profile`**: Rota para obter informações do perfil do usuário autenticado.
+
+#### Auth
+Gerenciamento de login, registro e autenticação
+
+- **POST** `/api/v1.0/auth/register`: Cadastro de novo usuário (somente administradores)
+- **POST** `/api/v1.0/auth/login`: Login de usuário
+- **GET** `/api/v1.0/auth/validate-token`: Validação do token JWT
+
+#### Banners
+Gerenciamento de banners
+
+- **POST** `/api/v1.0/banners`: Criar um novo banner (Somente administradores)
+- **GET** `/api/v1.0/banners`: Obter todos os banners
+- **PUT** `/api/v1.0/banners/{id}`: Atualizar um banner existente (Somente administradores)
+- **DELETE** `/api/v1.0/banners/{id}`: Deletar um banner (Somente administradores)
+
+#### Lessons
+Gerenciamento de aulas
+
+- **POST** `/api/v1.0/lessons`: Criar uma nova aula
+- **PUT** `/api/v1.0/lessons/{id}`: Atualizar uma aula existente
+- **DELETE** `/api/v1.0/lessons/{id}`: Deletar uma aula
+
+#### Modules
+Gerenciamento de módulos e aulas associadas
+
+- **POST** `/api/v1.0/modules`: Criar um novo módulo (somente administradores)
+- **GET** `/api/v1.0/modules`: Obter todos os módulos
+- **PUT** `/api/v1.0/modules/{id}`: Atualizar um módulo existente (somente administradores)
+- **DELETE** `/api/v1.0/modules/{id}`: Deletar um módulo (somente administradores)
+- **GET** `/api/v1.0/modules/{id}/lessons`: Obter aulas de um módulo específico
+
+#### Users
+Gerenciamento de usuários
+
+- **GET** `/api/v1.0/users/profile`: Obter perfil do usuário autenticado
+- **PUT** `/api/v1.0/users/profile`: Atualizar dados de um usuário (somente administradores)
+- **GET** `/api/v1.0/users/`: Obter usuários paginados (somente administradores)
+- **DELETE** `/api/v1.0/users/{uuid}`: Deletar um usuário (somente administradores)
+
+---
+
+## Swagger
+
+A documentação interativa da API foi gerada utilizando o **Swagger**. Você pode acessar a documentação da API em [http://localhost:3000/api-docs](http://localhost:3000/api-docs) após iniciar o servidor.
 
 ---
 
@@ -98,11 +139,13 @@ npm install
 
 <pre>
 <code>
+PORT=3000
 DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=password
 DB_NAME=members_area
 JWT_SECRET=your_jwt_secret
+JWT_EXPIRATION=expiration_time
 </code>
 </pre>
 
