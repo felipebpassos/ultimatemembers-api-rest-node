@@ -12,7 +12,7 @@ const {
 const createLesson = async (req, res) => {
     try {
         if (req.user.role !== 'adm') {
-            return res.status(403).json({ message: 'Acesso negado. Apenas administradores podem criar lições.' });
+            return res.status(403).json({ message: 'Acesso negado. Apenas administradores podem criar aulas.' });
         }
 
         const lesson = await createLessonService(req.body);
@@ -31,7 +31,7 @@ const createLesson = async (req, res) => {
 const updateLesson = async (req, res) => {
     try {
         if (req.user.role !== 'adm') {
-            return res.status(403).json({ message: 'Acesso negado. Apenas administradores podem atualizar lições.' });
+            return res.status(403).json({ message: 'Acesso negado. Apenas administradores podem atualizar aulas.' });
         }
 
         const { id } = req.params;
@@ -52,20 +52,20 @@ const updateLesson = async (req, res) => {
 const deleteLesson = async (req, res) => {
     try {
         if (req.user.role !== 'adm') {
-            return res.status(403).json({ message: 'Acesso negado. Apenas administradores podem deletar lições.' });
+            return res.status(403).json({ message: 'Acesso negado. Apenas administradores podem deletar aulas.' });
         }
 
         const { id } = req.params;
         const deleted = await deleteLessonService(id);
 
         if (!deleted) {
-            return res.status(404).json({ message: 'Lição não encontrada.' });
+            return res.status(404).json({ message: 'Aula não encontrada.' });
         }
 
-        res.status(200).json({ message: 'Lição deletada com sucesso.' });
+        res.status(200).json({ message: 'Aula deletada com sucesso.' });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ message: 'Erro ao deletar a lição.' });
+        res.status(500).json({ message: 'Erro ao deletar a aula.' });
     }
 };
 

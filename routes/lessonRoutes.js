@@ -17,7 +17,7 @@ const { createLesson, updateLesson, deleteLesson } = require('../controllers/les
  *   post:
  *     tags:
  *       - Lessons
- *     summary: Criar uma nova aula
+ *     summary: Criar uma nova aula (somente administradores)
  *     description: Cria uma nova aula. A rota requer um token JWT válido e o role 'adm'.
  *     security:
  *       - jwt: []
@@ -60,7 +60,7 @@ router.post('/', createLesson);
  *   put:
  *     tags:
  *       - Lessons
- *     summary: Atualizar uma aula existente
+ *     summary: Atualizar uma aula existente (somente administradores)
  *     description: Atualiza os detalhes de uma aula existente com base no ID. A rota requer um token JWT válido e o role 'adm'.
  *     security:
  *       - jwt: []
@@ -111,7 +111,7 @@ router.put('/:id', updateLesson);
  *   delete:
  *     tags:
  *       - Lessons
- *     summary: Deletar uma aula
+ *     summary: Deletar uma aula (somente administradores)
  *     description: Deleta uma aula existente com base no ID. A rota requer um token JWT válido e o role 'adm'.
  *     security:
  *       - jwt: []
