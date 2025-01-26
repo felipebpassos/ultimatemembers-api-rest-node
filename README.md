@@ -1,6 +1,8 @@
 # Ultimate Members (backend)
 
-![Interface da API](https://github.com/felipebpassos/felipebpassos/blob/main/print-api.png?raw=true)
+![Interface da API](https://github.com/felipebpassos/felipebpassos/blob/main/print.png?raw=true)
+
+[Frontend - Repositório](https://github.com/felipebpassos/members-area-react-ts-tailwind)
 
 ## Descrição do Projeto
 
@@ -153,7 +155,7 @@ JWT_EXPIRATION=expiration_time
 
 <pre>
 <code>
-npm run dev
+node index.js
 </code>
 </pre>
 
