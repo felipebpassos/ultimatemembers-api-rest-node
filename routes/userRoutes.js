@@ -3,6 +3,9 @@ const router = express.Router();
 
 // Importando o controlador de usuário
 const { getProfile, getUsersByRole, updateProfile, deleteUser } = require('../controllers/userController');
+// Importando validações e middleware de validação
+const { updateProfileValidation, getUsersByRoleValidation, deleteUserValidation } = require('../validations/userValidations');
+const validate = require('../middleware/validate');
 
 /**
  * @swagger
@@ -116,7 +119,7 @@ router.get('/profile', getProfile);
  *       500:
  *         description: Erro ao obter usuários.
  */
-router.get('/', getUsersByRole);
+router.get('/', validate(getUsersByRoleValidation), getUsersByRole);
 
 /**
  * @swagger
@@ -182,7 +185,7 @@ router.get('/', getUsersByRole);
  *                   type: string
  *                   example: "Erro ao atualizar o perfil do usuário."
  */
-router.put('/profile', updateProfile);
+router.put('/profile', validate(updateProfileValidation), updateProfile);
 
 /**
  * @swagger
@@ -212,6 +215,6 @@ router.put('/profile', updateProfile);
  *       500:
  *         description: Erro ao deletar o usuário.
  */
-router.delete('/:uuid', deleteUser);
+router.delete('/:uuid', validate(deleteUserValidation), deleteUser);
 
 module.exports = router;

@@ -3,6 +3,9 @@ const router = express.Router();
 
 // Importando o controlador de banners
 const { createBanner, getBanners, updateBanner, deleteBanner } = require('../controllers/bannerController');
+// Importando validações e middleware de validação
+const { createBannerValidation, updateBannerValidation, deleteBannerValidation } = require('../validations/bannerValidations');
+const validate = require('../middleware/validate');
 
 /**
  * @swagger
@@ -45,7 +48,7 @@ const { createBanner, getBanners, updateBanner, deleteBanner } = require('../con
  *       500:
  *         description: Erro ao criar o banner.
  */
-router.post('/', createBanner);
+router.post('/', validate(createBannerValidation), createBanner);
 
 /**
  * @swagger
@@ -107,7 +110,7 @@ router.get('/', getBanners);
  *       500:
  *         description: Erro ao atualizar o banner.
  */
-router.put('/:id', updateBanner);
+router.put('/:id', validate(updateBannerValidation), updateBanner);
 
 /**
  * @swagger
@@ -135,6 +138,6 @@ router.put('/:id', updateBanner);
  *       500:
  *         description: Erro ao deletar o banner.
  */
-router.delete('/:id', deleteBanner);
+router.delete('/:id', validate(deleteBannerValidation), deleteBanner);
 
 module.exports = router;

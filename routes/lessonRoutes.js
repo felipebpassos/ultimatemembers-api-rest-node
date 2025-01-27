@@ -3,6 +3,9 @@ const router = express.Router();
 
 // Importando o controlador de lições
 const { createLesson, updateLesson, deleteLesson } = require('../controllers/lessonController');
+// Importando validações e middleware de validação
+const { createLessonValidation, updateLessonValidation, deleteLessonValidation } = require('../validations/moduleLessonValidations');
+const validate = require('../middleware/validate');
 
 /**
  * @swagger
@@ -52,7 +55,7 @@ const { createLesson, updateLesson, deleteLesson } = require('../controllers/les
  *       500:
  *         description: Erro ao criar a aula.
  */
-router.post('/', createLesson);
+router.post('/', validate(createLessonValidation), createLesson);
 
 /**
  * @swagger
@@ -103,7 +106,7 @@ router.post('/', createLesson);
  *       500:
  *         description: Erro ao atualizar a aula.
  */
-router.put('/:id', updateLesson);
+router.put('/:id', validate(updateLessonValidation), updateLesson);
 
 /**
  * @swagger
@@ -131,6 +134,6 @@ router.put('/:id', updateLesson);
  *       500:
  *         description: Erro ao deletar a aula.
  */
-router.delete('/:id', deleteLesson);
+router.delete('/:id', validate(deleteLessonValidation), deleteLesson);
 
 module.exports = router;

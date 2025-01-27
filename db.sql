@@ -6,7 +6,7 @@ COLLATE utf8mb4_general_ci;
 -- Selecionando o banco de dados
 USE ultimatemembers;
 
-select * from users;
+select * from lessons;
 
 -- Criação da tabela Users
 CREATE TABLE Users (

@@ -16,7 +16,9 @@ Este é o projeto backend de **Área de Membros para Cursos Online** desenvolvid
 - **JWT (JSON Web Tokens)** para autenticação de usuários;
 - **bcrypt.js** para criptografia de senhas;
 - **dotenv** para gerenciamento de variáveis de ambiente;
-- **Swagger** para documentação e uso interativo da API.
+- **Swagger** para documentação e uso interativo da API;
+- **Helmet** para adicionar camadas de segurança HTTP;
+- **express-validator** para validação de entradas de dados.
 
 A aplicação gerencia o backend da plataforma de cursos online, com funcionalidades de autenticação, controle de usuários e acesso a conteúdos como módulos e aulas.
 
@@ -32,7 +34,7 @@ A aplicação gerencia o backend da plataforma de cursos online, com funcionalid
 ### Controle de Acesso:
 - Usuários logados podem acessar rotas privadas.
 - Usuários não logados são redirecionados para a tela de login.
-- Permite que apenas usuários autenticados acessem conteúdos como módulos e aulas.
+- Algumas rotas são restritas apenas a administradores.
 
 ### Rotas Implementadas:
 
@@ -74,6 +76,15 @@ Gerenciamento de usuários
 - **PUT** `/api/v1.0/users/profile`: Atualizar dados de um usuário (somente administradores)
 - **GET** `/api/v1.0/users/`: Obter usuários paginados (somente administradores)
 - **DELETE** `/api/v1.0/users/{uuid}`: Deletar um usuário (somente administradores)
+
+---
+
+## Segurança
+
+Este projeto utiliza os seguintes recursos para melhorar a segurança:
+
+- **Helmet**: Adiciona headers de segurança para prevenir ataques comuns como XSS, clickjacking e ataques de injeção.
+- **express-validator**: Garante que entradas de dados sejam validadas e sanitizadas para evitar injeção de SQL ou outros tipos de exploração.
 
 ---
 
@@ -170,5 +181,5 @@ O servidor será iniciado na porta 3000 por padrão.
 ## Próximos Passos
 
 - Implementar a edição de dados no frontend em painel administrativo, com ações para adicionar, editar ou remover módulos e aulas.
-- Continuar o desenvolvimento de novas funcionalidades como: integração com marketplaces (Kiwify, Hotmart), salvar progresso, download de arquivos, multitenancy com whitelabel, comunidade, gameficação e etc.
+- Continuar o desenvolvimento de novas funcionalidades como: integração com marketplaces (Kiwify, Hotmart), salvar progresso, download de arquivos, multitenancy com whitelabel, comunidade, gamificação e etc.
 - Adicionar testes para validar o fluxo da aplicação.

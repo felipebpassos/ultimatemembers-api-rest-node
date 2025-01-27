@@ -5,6 +5,9 @@ const router = express.Router();
 const { register, login } = require('../controllers/authController');
 // Middleware de autenticação
 const { authenticateJWT } = require('../middleware/authMiddleware');
+// Importando validações e middleware de validação
+const { createUserValidation, loginValidation } = require('../validations/userValidations');
+const validate = require('../middleware/validate');
 
 /**
  * @swagger
@@ -103,7 +106,7 @@ const { authenticateJWT } = require('../middleware/authMiddleware');
  *                   type: string
  *                   example: "Erro ao registrar usuário."
  */
-router.post('/register', authenticateJWT, register);
+router.post('/register', authenticateJWT, validate(createUserValidation), register);
 
 /**
  * @swagger
@@ -181,7 +184,7 @@ router.post('/register', authenticateJWT, register);
  *                   type: string
  *                   example: "Erro ao realizar login."
  */
-router.post('/login', login);
+router.post('/login', validate(loginValidation), login);
 
 /**
  * @swagger

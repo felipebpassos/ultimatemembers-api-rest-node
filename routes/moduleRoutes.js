@@ -3,6 +3,9 @@ const router = express.Router();
 
 // Importando o controlador de módulos
 const { createModule, getModules, updateModule, deleteModule, getLessonsByModule } = require('../controllers/moduleController');
+// Importando validações e middleware de validação
+const { createModuleValidation, updateModuleValidation, deleteModuleValidation, getLessonsByModuleValidation } = require('../validations/moduleLessonValidations');
+const validate = require('../middleware/validate');
 
 /**
  * @swagger
@@ -72,7 +75,7 @@ const { createModule, getModules, updateModule, deleteModule, getLessonsByModule
  *       500:
  *         description: Erro ao criar o módulo.
  */
-router.post('/', createModule);
+router.post('/', validate(createModuleValidation), createModule);
 
 /**
  * @swagger
@@ -157,7 +160,7 @@ router.get('/', getModules);
  *       500:
  *         description: Erro ao atualizar o módulo.
  */
-router.put('/:id', updateModule);
+router.put('/:id', validate(updateModuleValidation), updateModule);
 
 /**
  * @swagger
@@ -184,7 +187,7 @@ router.put('/:id', updateModule);
  *       500:
  *         description: Erro ao deletar o módulo.
  */
-router.delete('/:id', deleteModule);
+router.delete('/:id', validate(deleteModuleValidation), deleteModule);
 
 /**
  * @swagger
@@ -224,6 +227,6 @@ router.delete('/:id', deleteModule);
  *       500:
  *         description: Erro ao obter as aulas do módulo.
  */
-router.get('/:id/lessons', getLessonsByModule);
+router.get('/:id/lessons', validate(getLessonsByModuleValidation), getLessonsByModule);
 
 module.exports = router;
