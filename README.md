@@ -167,6 +167,6 @@ O servidor será iniciado na porta 3000 por padrão.
 
 ## Próximos Passos
 
-- Concluir a implementação de mais rotas e funcionalidades relacionadas a módulos e aulas.
-- Realizar a integração com o frontend para substituir dados estáticos por dados dinâmicos da API.
-- Implementar testes automatizados para as rotas da API e autenticação.
+- Implementar a edição de dados no frontend em painel administrativo, com ações para adicionar, editar ou remover módulos e aulas.
+- Continuar o desenvolvimento de novas funcionalidades como: integração com marketplaces (Kiwify, Hotmart), salvar progresso, download de arquivos, multitenancy com whitelabel, comunidade, gameficação e etc.
+- Adicionar testes para validar o fluxo da aplicação.

@@ -28,7 +28,15 @@ const app = express();
 app.use(cors());
 app.use(helmet()); // Adicionando o helmet para segurança
 app.use(morgan('dev')); // Log de requisições
-app.use(express.json()); // Permite que o servidor entenda requisições com corpo JSON
+app.use(express.json({ limit: '100kb' })); // Limita o tamanho das requisições JSON para 100 KB
+
+// Middleware de tratamento de erros para payloads muito grandes
+app.use((err, req, res, next) => {
+  if (err.type === 'entity.too.large') {
+    return res.status(413).json({ error: 'Payload muito grande.' });
+  }
+  next(err);
+});
 
 // Prefixo de versão para as rotas
 const API_VERSION = '/api/v1.0';
